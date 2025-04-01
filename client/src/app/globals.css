@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #13C5DD;
+  --secondary: #354F8E;
+  --light: #EFF5F9;
+  --dark: #1D2A4D;
+}
+
+.NaveBG{
+  background-color: rgba(255, 255, 255, 0.973);
+}
+.text-primary {
+  color: var(--primary);
+}
+.text-secondary {
+  color: var(--secondary);
+}
+.bg-primary {
+  background-color: var(--primary);
+}
+.bg-secondary {
+  background-color: var(--secondary);
+}
+.bg-dark{
+  background-color: var(--dark);
+}
+.bg-gradient{
+  background: linear-gradient(to right, #13C5DD, #354F8E);
+}
+.border-primary{
+  border-color: var(--primary);
+}
+
+
+
+
+
+
+/* Ensure progress bar is visible */
+#nprogress .bar {
+  background: #4f46e5 !important; /* Change color */
+  height: 4px !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #4f46e5, 0 0 5px #4f46e5;
+}
+
+#nprogress .spinner {
+  display: none !important; /* Hides spinner */
+}
+
+
