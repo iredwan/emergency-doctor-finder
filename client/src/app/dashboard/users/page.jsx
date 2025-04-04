@@ -147,6 +147,7 @@ export default function UsersPage() {
       console.error("Error updating user:", error);
       ErrorToast("Failed to update user");
     } finally {
+      setFileToUpload(null);
       setProcessing(false);
     }
   };
@@ -268,13 +269,13 @@ export default function UsersPage() {
                   <h3 className="text-xl font-semibold text-gray-800 mb-1">
                     {user.firstName} {user.lastName}
                   </h3>
-                <p className="text-sm text-gray-500 flex items-center justify-center">
-                  <FiMail className="mr-1" />
-                  {user.email?.length > 25 ? user.email.slice(0, 25) + '...' : user.email}
+                <p className="text-sm text-gray-500 flex items-center justify-center break-words whitespace-normal">
+                  <FiMail className="mr-1 flex-shrink-0" />
+                  <span className="break-all">{user.email}</span>
                 </p>
               </div>
               
-              <table className="w-full text-left table-auto min-w-max shadow-md rounded-lg overflow-hidden">
+              <table className="w-full table-fixed border-collapse shadow-md rounded-lg overflow-hidden">
                 <thead>
                   <tr className="border-b border-slate-300 bg-slate-50 text-center">
                     <th className="p-4 text-sm font-normal leading-none text-slate-500">
@@ -288,7 +289,9 @@ export default function UsersPage() {
                 <tbody className="text-center">
                   <tr className="hover:bg-slate-50">
                     <td className="p-4 border-b border-slate-200 py-5">
-                    First Name
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">First Name</p>
+                      </div>
                     </td>
                     <td className="p-4 border-b border-slate-200 py-5">
                       {editingUserId === user._id ? (
@@ -301,13 +304,17 @@ export default function UsersPage() {
                         placeholder="First Name"
                       />
                       ) : (
-                        <span>{user.firstName || "Not provided"}</span>
+                        <div className="w-full overflow-hidden">
+                          <p className="text-center break-words">{user.firstName || "Not provided"}</p>
+                        </div>
                       )}
                     </td>
                   </tr>
                   <tr className="hover:bg-slate-50">
                     <td className="p-4 border-b border-slate-200 py-5">
-                    Last Name
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">Last Name</p>
+                      </div>
                     </td>
                     <td className="p-4 border-b border-slate-200 py-5">
                       {editingUserId === user._id ? (
@@ -320,13 +327,17 @@ export default function UsersPage() {
                         placeholder="Last Name"
                       />
                       ) : (
-                        <span>{user.lastName || "Not provided"}</span>
+                        <div className="w-full overflow-hidden">
+                          <p className="text-center break-words">{user.lastName || "Not provided"}</p>
+                        </div>
                       )}
                     </td>
                   </tr>
                   <tr className="hover:bg-slate-50">
                     <td className="p-4 border-b border-slate-200 py-5">
-                      Phone
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">Phone</p>
+                      </div>
                     </td>
                     <td className="p-4 border-b border-slate-200 py-5">
                       {editingUserId === user._id ? (
@@ -339,12 +350,18 @@ export default function UsersPage() {
                           placeholder="Phone Number"
                         />
                       ) : (
-                        <span>{user.phone || "Not provided"}</span>
+                        <div className="w-full overflow-hidden">
+                          <p className="text-center break-words">{user.phone || "Not provided"}</p>
+                        </div>
                       )}
                     </td>
                   </tr>
                   <tr className="hover:bg-slate-50">
-                    <td className="p-4 border-b border-slate-200 py-5">Role</td>
+                    <td className="p-4 border-b border-slate-200 py-5">
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">Role</p>
+                      </div>
+                    </td>
                     <td className="p-4 border-b border-slate-200 py-5">
                       {editingUserId === user._id ? (
                         <select
@@ -357,13 +374,15 @@ export default function UsersPage() {
                           <option value="admin">Admin</option>
                         </select>
                       ) : (
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          user.role === 'admin' 
-                            ? 'bg-purple-100 text-purple-800' 
-                            : 'bg-green-100 text-green-800'
-                        }`}>
-                          {user.role || "user"}
-                        </span>
+                        <div className="w-full overflow-hidden">
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            user.role === 'admin' 
+                              ? 'bg-purple-100 text-purple-800' 
+                              : 'bg-green-100 text-green-800'
+                          }`}>
+                            {user.role || "user"}
+                          </span>
+                        </div>
                       )}
                     </td>
                   </tr>

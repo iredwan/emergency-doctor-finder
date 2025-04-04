@@ -134,7 +134,7 @@ export default function SchedulePage() {
   };
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 px-5">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-gray-800">Available Doctor Schedules</h1>
         <button 
@@ -153,12 +153,10 @@ export default function SchedulePage() {
             <div className="w-full sm:w-auto">
               <label className="block text-sm font-medium text-gray-700 mb-1">Filter by Date</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                  <FiCalendar className="text-gray-400 text-sm" />
-                </div>
                 <input
+                  id="dateInput"
                   type="date"
-                  className="pl-8 pr-3 py-1 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 transition-all"
+                  className=" pr-3 py-1 text-sm border border-gray-200 w-full rounded-lg focus:outline-none focus:ring-1 focus:ring-primary/50 focus:border-primary/50 transition-all"
                   value={selectedDate}
                   onChange={(e) => setSelectedDate(e.target.value)}
                 />
@@ -212,6 +210,10 @@ export default function SchedulePage() {
         />
       </div>
 
+      <div className="text-center">
+        <h1 className="text-sm font-semibold text-red-500 py-5">By default, the schedule will be shown for today. You can filter the schedule by date and day.</h1>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {loading ? (
           <div className="col-span-full flex justify-center py-12">
@@ -251,7 +253,7 @@ export default function SchedulePage() {
                 </p>
               </div>
               
-              <table className="w-full text-left table-auto min-w-max shadow-md rounded-lg overflow-hidden">
+              <table className="w-full text-left table-auto shadow-md rounded-lg overflow-hidden">
                 <thead>
                   <tr className="border-b border-slate-300 bg-slate-50 text-center">
                     <th className="p-4 text-sm font-normal leading-none text-slate-500" colSpan="2">
@@ -261,12 +263,12 @@ export default function SchedulePage() {
                 </thead>
                 <tbody className="text-center">
                 <tr className="transition-all duration-300 transform hover:scale-105">
-                    <td className="p-4 border-b border-slate-200 py-5">
-                      <div className="flex flex-wrap gap-1 justify-center">
+                    <td className="p-4 border-b border-slate-200 py-5 overflow-hidden">
+                      <div className="flex flex-wrap gap-1 justify-center max-w-full">
                         {schedule.availableDays && schedule.availableDays.map((day, idx) => (
                           <span
                             key={`day-${day}-${idx}`}
-                            className={`px-2 py-1 rounded-full text-xs font-medium ${getDayColor(day)} ${selectedDay === day ? 'ring-2 ring-teal-500' : ''}`}
+                            className={`px-2 py-1 rounded-full text-xs font-medium ${getDayColor(day)} ${selectedDay === day ? 'ring-2 ring-teal-500' : ''} truncate`}
                           >
                             {day}
                           </span>
@@ -275,26 +277,36 @@ export default function SchedulePage() {
                     </td>
                   </tr>
                   
-
                   <tr className="transition-all duration-300 transform hover:scale-105">
-                    <td className="flex items-center justify-center p-4 border-b border-slate-200 py-5">
-                      <FiClock className="mr-2" />
-                      <span>{formatTime(schedule.startTime)} - {formatTime(schedule.endTime)}</span>
+                    <td className="p-4 border-b border-slate-200 py-5 break-words whitespace-normal">
+                      <div className="flex items-center justify-center">
+                        <FiClock className="mr-2" />
+                        <span className="break-all">
+                          {formatTime(schedule.startTime)} - {formatTime(schedule.endTime)}
+                        </span>
+                      </div>
                     </td>
                   </tr>
                     
                   <tr className="transition-all duration-300 transform hover:scale-105">
-                    <td className="flex items-center justify-center p-4 border-b border-slate-200 py-5">
+                    <td className="p-4 border-b border-slate-200 py-5 break-words whitespace-normal">
+                      <div className="flex items-center justify-center">
                         <FiPhone className="mr-2" />
-                      <span>
-                        {schedule.phone}</span>
+                        <span className="break-all">
+                          {schedule.phone}
+                        </span>
+                      </div>
                     </td>
                   </tr>
 
                   <tr className="transition-all duration-300 transform hover:scale-105">
-                    <td className="flex items-center justify-center p-4 py-5">
-                      <FiMail className="mr-2" />
-                      <span>{(schedule.email) }</span>
+                    <td className="p-4 py-5 break-words whitespace-normal">
+                        <div className="flex items-center justify-center">
+                          <FiMail className="mr-2" />
+                          <span className="break-all">
+                            {(schedule.email)}
+                          </span>
+                        </div>
                     </td>
                   </tr>
                 </tbody>

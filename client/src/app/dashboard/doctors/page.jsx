@@ -267,11 +267,11 @@ export default function DoctorsPage() {
 
   return (
     <div className="container mx-auto mt-8 lg:mt-3">
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4 sm:gap-0">
         <h1 className="text-2xl font-bold text-gray-800">Manage Doctors</h1>
         <button 
           onClick={() => setIsAddModalOpen(true)}
-          className="flex items-center px-4 py-2 bg-primary text-white rounded-full hover:bg-primary/80 transition-colors shadow-md cursor-pointer"
+          className="flex items-center px-4 py-2 bg-primary text-white rounded-full hover:bg-primary/80 transition-colors shadow-md cursor-pointer w-full sm:w-auto justify-center"
         >
           <FiFilePlus className="mr-2" />
           Add New Doctor
@@ -366,19 +366,19 @@ export default function DoctorsPage() {
                   <h3 className="text-xl font-semibold text-gray-800 mb-1">
                     {doctor.name}
                   </h3>
-                <p className="text-sm text-gray-500 flex items-center justify-center">
-                  <FiMail className="mr-1" />
-                  {doctor.email?.length > 25 ? doctor.email.slice(0, 25) + '...' : doctor.email}
+                <p className="text-sm text-gray-500 flex items-center justify-center break-words whitespace-normal">
+                  <FiMail className="mr-1 flex-shrink-0" />
+                  <span className="break-all">{doctor.email}</span>
                 </p>
               </div>
               
-              <table className="w-full text-left table-auto min-w-max shadow-md rounded-lg overflow-hidden">
+              <table className="w-full table-fixed border-collapse shadow-md rounded-lg overflow-hidden">
                 <thead>
                   <tr className="border-b border-slate-300 bg-slate-50 text-center">
-                    <th className="p-4 text-sm font-normal leading-none text-slate-500">
+                    <th width="30%" className="p-4 text-sm font-normal leading-none text-slate-500">
                       Item
                     </th>
-                    <th className="p-4 text-sm font-normal leading-none text-slate-500">
+                    <th width="70%" className="p-4 text-sm font-normal leading-none text-slate-500">
                       Value
                     </th>
                   </tr>
@@ -386,7 +386,9 @@ export default function DoctorsPage() {
                 <tbody className="text-center">
                   <tr className="hover:bg-slate-50">
                     <td className="p-4 border-b border-slate-200 py-5">
-                    Name
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">Name</p>
+                      </div>
                     </td>
                     <td className="p-4 border-b border-slate-200 py-5">
                       {editingDoctorId === doctor._id ? (
@@ -399,13 +401,17 @@ export default function DoctorsPage() {
                         placeholder="Name"
                       />
                       ) : (
-                        <span>{doctor.name || "Not provided"}</span>
+                        <div className="w-full overflow-hidden">
+                          <p className="text-center break-words">{doctor.name || "Not provided"}</p>
+                        </div>
                       )}
                     </td>
                   </tr>
                   <tr className="hover:bg-slate-50">
                     <td className="p-4 border-b border-slate-200 py-5">
-                    Education
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">Education</p>
+                      </div>
                     </td>
                     <td className="p-4 border-b border-slate-200 py-5">
                       {editingDoctorId === doctor._id ? (
@@ -418,13 +424,40 @@ export default function DoctorsPage() {
                         placeholder="Education"
                       />
                       ) : (
-                        <span>{doctor.education || "Not provided"}</span>
+                        <div className="w-full overflow-hidden">
+                          <p className="text-center break-words">{doctor.education || "Not provided"}</p>
+                        </div>
                       )}
                     </td>
                   </tr>
                   <tr className="hover:bg-slate-50">
                     <td className="p-4 border-b border-slate-200 py-5">
-                    Experience
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">Specialty</p>
+                      </div>
+                    </td>
+                    <td className="p-4 border-b border-slate-200 py-5">
+                      {editingDoctorId === doctor._id ? (
+                        <input
+                          type="text"
+                          name="specialty"
+                          value={editFormData.specialty}
+                          onChange={handleEditInputChange}
+                          className="w-full text-center"
+                          placeholder="Specialty"
+                        />
+                      ) : (
+                        <div className="w-full overflow-hidden">
+                          <p className="text-center break-words">{doctor.specialty || "Not provided"}</p>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                  <tr className="hover:bg-slate-50">
+                    <td className="p-4 border-b border-slate-200 py-5">
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">Experience</p>
+                      </div>
                     </td>
                     <td className="p-4 border-b border-slate-200 py-5">
                       {editingDoctorId === doctor._id ? (
@@ -437,13 +470,17 @@ export default function DoctorsPage() {
                           placeholder="Experience"
                         />
                       ) : (
-                        <span>{doctor.experience || "Not provided"}</span>
+                        <div className="w-full overflow-hidden">
+                          <p className="text-center break-words">{doctor.experience || "Not provided"}</p>
+                        </div>
                       )}
                     </td>
                   </tr>
                   <tr className="hover:bg-slate-50">
                     <td className="p-4 border-b border-slate-200 py-5">
-                    Email
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">Email</p>
+                      </div>
                     </td>
                     <td className="p-4 border-b border-slate-200 py-5">
                       {editingDoctorId === doctor._id ? (
@@ -456,13 +493,17 @@ export default function DoctorsPage() {
                           placeholder="Email"
                         />
                       ) : (
-                        <span>{doctor.email || "Not provided"}</span>
+                        <div className="w-full overflow-hidden">
+                          <p className="text-center break-words">{doctor.email || "Not provided"}</p>
+                        </div>
                       )}
                     </td>
                   </tr>
                   <tr className="hover:bg-slate-50">
                     <td className="p-4 border-b border-slate-200 py-5">
-                    Phone
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">Phone</p>
+                      </div>
                     </td>
                     <td className="p-4 border-b border-slate-200 py-5">
                       {editingDoctorId === doctor._id ? (
@@ -475,7 +516,9 @@ export default function DoctorsPage() {
                           placeholder="Phone"
                         />
                       ) : (
-                        <span>{doctor.phone || "Not provided"}</span>
+                        <div className="w-full overflow-hidden">
+                          <p className="text-center break-words">{doctor.phone || "Not provided"}</p>
+                        </div>
                       )}
                     </td>
                   </tr>

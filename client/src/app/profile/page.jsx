@@ -62,6 +62,15 @@ const ProfilePage = () => {
       const data = await getProfile(decoded.user_id);
       if (data) {
         setUser(data.data);
+        
+        // Initialize edit form data with user data
+        setEditFormData({
+          firstName: data.data.firstName || "",
+          lastName: data.data.lastName || "",
+          phone: data.data.phone || "",
+          role: data.data.role || "user",
+          img: data.data.img || ""
+        });
       }
     } catch (error) {
       console.error("Error fetching profile:", error);
@@ -73,6 +82,16 @@ const ProfilePage = () => {
 
   const handleEdit = () => {
     setIsEditing(true);
+    // Initialize form data with current user data
+    if (user) {
+      setEditFormData({
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
+        phone: user.phone || "",
+        role: user.role || "user",
+        img: user.img || ""
+      });
+    }
   };
 
   const handleCancelEdit = () => {

@@ -324,7 +324,7 @@ export default function SchedulesPage() {
                 <option value="all">All Doctors</option>
                 {doctors.map((doctor, idx) => (
                   <option key={doctor._id || `dr-option-${idx}`} value={doctor._id}>
-                    {doctor.name}, , {doctor.specialty} Specialist
+                    {doctor.name}{doctor.specialty ? `, ${doctor.specialty} Specialist` : ''}
                   </option>
                 ))}
               </select>
@@ -390,7 +390,7 @@ export default function SchedulesPage() {
                       <option value="">Select Doctor</option>
                       {doctors.map((doctor, idx) => (
                         <option key={doctor._id || `edit-dr-option-${idx}`} value={doctor._id}>
-                          {doctor.name}, , {doctor.specialty} Specialist
+                          {doctor.name}{doctor.specialty ? `, ${doctor.specialty} Specialist` : ''}
                         </option>
                       ))}
                     </select>
@@ -494,15 +494,15 @@ export default function SchedulesPage() {
                   
                   <div className="w-full mb-4">
                     <h3 className="text-xl font-semibold text-gray-800 mb-1">{getDoctorName(schedule.doctorId)}</h3>
-                    <p className="text-sm text-gray-500 flex items-center justify-center">{(schedule.specialty)}</p>
-                    <p className="text-sm text-gray-500 flex items-center justify-center">{(schedule.phone)}</p>
-                    <p className="text-sm text-gray-500 flex items-center justify-center">
-                      <FiClock className="mr-1" />
-                      {formatTime(schedule.startTime)} - {formatTime(schedule.endTime)}
+                    <p className="text-sm text-gray-500 flex items-center justify-center break-words whitespace-normal">{(schedule.specialty)}</p>
+                    <p className="text-sm text-gray-500 flex items-center justify-center break-words whitespace-normal">{(schedule.phone)}</p>
+                    <p className="text-sm text-gray-500 flex items-center justify-center break-words whitespace-normal">
+                      <FiClock className="mr-1 flex-shrink-0" />
+                      <span className="break-all">{formatTime(schedule.startTime)} - {formatTime(schedule.endTime)}</span>
                     </p>
                   </div>
                   
-                  <table className="w-full text-left table-auto min-w-max shadow-md rounded-lg overflow-hidden">
+                  <table className="w-full table-fixed border-collapse shadow-md rounded-lg overflow-hidden">
                     <thead>
                       <tr className="border-b border-slate-300 bg-slate-50 text-center">
                         <th className="p-4 text-sm font-normal leading-none text-slate-500">
@@ -516,23 +516,33 @@ export default function SchedulesPage() {
                     <tbody className="text-center">
                       <tr className="hover:bg-slate-50">
                         <td className="p-4 border-b border-slate-200 py-5">
-                          Doctor
+                          <div className="w-full overflow-hidden">
+                            <p className="text-center break-words">Doctor</p>
+                          </div>
                         </td>
                         <td className="p-4 border-b border-slate-200 py-5">
-                          <span>{getDoctorName(schedule.doctorId)}</span>
-                        </td>
-                      </tr>
-                      <tr className="hover:bg-slate-50">
-                        <td className="p-4 border-b border-slate-200 py-5">
-                          Time Slot
-                        </td>
-                        <td className="p-4 border-b border-slate-200 py-5">
-                          <span>{formatTime(schedule.startTime)} - {formatTime(schedule.endTime)}</span>
+                          <div className="w-full overflow-hidden">
+                            <p className="text-center break-words">{getDoctorName(schedule.doctorId)}</p>
+                          </div>
                         </td>
                       </tr>
                       <tr className="hover:bg-slate-50">
                         <td className="p-4 border-b border-slate-200 py-5">
-                          Available Days
+                          <div className="w-full overflow-hidden">
+                            <p className="text-center break-words">Time Slot</p>
+                          </div>
+                        </td>
+                        <td className="p-4 border-b border-slate-200 py-5">
+                          <div className="w-full overflow-hidden">
+                            <p className="text-center break-words">{formatTime(schedule.startTime)} - {formatTime(schedule.endTime)}</p>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr className="hover:bg-slate-50">
+                        <td className="p-4 border-b border-slate-200 py-5">
+                          <div className="w-full overflow-hidden">
+                            <p className="text-center break-words">Available Days</p>
+                          </div>
                         </td>
                         <td className="p-4 border-b border-slate-200 py-5">
                           <div className="flex flex-wrap gap-1 justify-center">
@@ -601,7 +611,7 @@ export default function SchedulesPage() {
                   <option value="">Select Doctor</option>
                   {doctors.map((doctor, idx) => (
                     <option key={doctor._id || `new-dr-${idx}`} value={doctor._id}>
-                      {doctor.name}, , {doctor.specialty} Specialist
+                      {doctor.name}{doctor.specialty ? `, ${doctor.specialty} Specialist` : ''}
                     </option>
                   ))}
                 </select>

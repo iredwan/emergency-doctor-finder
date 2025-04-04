@@ -25,14 +25,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Allow requests from both development and production
-const allowedOrigins = ['https://doctor-finder.ifrahimredwan.info']; // Replace with your actual domain
-// const allowedOrigins = ['http://localhost:3000']; // Replace with your actual domain
+const allowedOrigins = [
+  'https://doctor-finder.ifrahimredwan.info',
+  'http://localhost:3000',
+  'http://localhost:5000'
+]; 
 
 app.use(cookieParser());
 app.use(cors({ 
   credentials: true, 
   origin: function(origin, callback) {
-    // Allow requests with no origin (like mobile apps, curl requests)
+    // Allow requests with no origin (like mobile apps, curl requests, or same-origin requests)
     if (!origin) return callback(null, true);
     
     if (allowedOrigins.indexOf(origin) === -1) {

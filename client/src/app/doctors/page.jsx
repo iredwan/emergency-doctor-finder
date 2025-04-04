@@ -49,7 +49,7 @@ export default function DoctorsPage() {
   );
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 px-3">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-gray-800">Our Doctors</h1>
       </div>
@@ -93,12 +93,13 @@ export default function DoctorsPage() {
                   <h3 className="text-xl font-bold mb-1">
                     {doctor.name}
                   </h3>
-                <p className="text-sm flex items-center justify-center">
-                  <FiMail className="mr-1" /> {doctor.email}
+                <p className="text-sm flex items-center justify-center break-words whitespace-normal">
+                  <FiMail className="mr-1 flex-shrink-0" /> 
+                  <span className="break-all">{doctor.email}</span>
                 </p>
               </div>
               
-              <table className="w-full text-left table-auto min-w-max shadow-md rounded-lg overflow-hidden">
+              <table className="w-full table-fixed border-collapse shadow-md rounded-lg overflow-hidden">
                 <thead>
                   <tr className="border-b border-slate-300 bg-slate-50 text-center">
                     <th className="p-4 text-sm font-normal leading-none text-slate-500" colSpan="2">
@@ -108,35 +109,35 @@ export default function DoctorsPage() {
                 </thead>
                 <tbody className="text-center">
                   <tr className="transition-all duration-300 transform hover:scale-105">
-                    <td className="p-4 border-b border-slate-200 py-5">
-                    Education
-                    </td>
-                    <td className="p-4 border-b border-slate-200 py-5">
-                        <span>{doctor.education || "Not provided"}</span>
-                    </td>
-                  </tr>
-                  <tr className="transition-all duration-300 transform hover:scale-105">
-                    <td className="p-4 border-b border-slate-200 py-5">
-                    Experience
-                    </td>
-                    <td className="p-4 border-b border-slate-200 py-5">
-                        <span>{doctor.experience || "Not provided"}</span>
+                    <td width="30%" className="p-4 border-b border-slate-200 py-5">Education</td>
+                    <td width="70%" className="p-4 border-b border-slate-200 py-5">
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">{doctor.education || "Not provided"}</p>
+                      </div>
                     </td>
                   </tr>
                   <tr className="transition-all duration-300 transform hover:scale-105">
-                    <td className="p-4 border-b border-slate-200 py-5">
-                    Specialty
-                    </td>
-                    <td className="p-4 border-b border-slate-200 py-5">
-                        <span>{doctor.specialty || "Not provided"}</span>
+                    <td width="30%" className="p-4 border-b border-slate-200 py-5">Experience</td>
+                    <td width="70%" className="p-4 border-b border-slate-200 py-5">
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">{doctor.experience || "Not provided"}</p>
+                      </div>
                     </td>
                   </tr>
                   <tr className="transition-all duration-300 transform hover:scale-105">
-                    <td className="p-4 border-slate-200 py-5">
-                    Phone
+                    <td width="30%" className="p-4 border-b border-slate-200 py-5">Specialty</td>
+                    <td width="70%" className="p-4 border-b border-slate-200 py-5">
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">{doctor.specialty || "Not provided"}</p>
+                      </div>
                     </td>
-                    <td className="p-4 border-slate-200 py-5">
-                        <span>{doctor.phone || "Not provided"}</span>
+                  </tr>
+                  <tr className="transition-all duration-300 transform hover:scale-105">
+                    <td width="30%" className="p-4 border-slate-200 py-5">Phone</td>
+                    <td width="70%" className="p-4 border-slate-200 py-5">
+                      <div className="w-full overflow-hidden">
+                        <p className="text-center break-words">{doctor.phone || "Not provided"}</p>
+                      </div>
                     </td>
                   </tr>
                 </tbody>
